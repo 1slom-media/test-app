@@ -91,7 +91,8 @@
         font-size: 20px;
         line-height: 30px;
         color: #BBBBBB;  
-        border-bottom: 1px solid #BBBBBB;  
+        border-bottom: 1px solid #BBBBBB; 
+        cursor: pointer; 
 
         &-title{
             font-weight: 500;
@@ -147,5 +148,24 @@
                 text-align: center;
             }
         }
+    }
+
+    &__link{
+        display:inline-block;
+        width: 40%;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        color: #000000;
+        padding: 17px 30px;
+        border: 1px solid #18A0FB;
+        border-radius: 20px;
+
+        &:hover{
+            background-color: #18A0FB;
+            color: #fff;
+        }
+        // color: #18a0fb;
     }
 }

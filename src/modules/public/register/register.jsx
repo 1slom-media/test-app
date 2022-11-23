@@ -24,7 +24,7 @@ export const Register=()=>{
             region:region.current.value
         }
 
-        const res = await fetch("http://localhost:5000/register", {
+        const res = await fetch("https://taest-b.herokuapp.com/register", {
           method: 'POST',
           headers: {
           'Content-type': 'application/json',

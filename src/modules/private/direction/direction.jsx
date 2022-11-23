@@ -1,14 +1,26 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import {FiArrowLeft} from 'react-icons/fi';
 import './direction.scss';
 import { useAuth } from '../../../hooks/useAuth';
 
 export const Direction=()=>{
-    const {faculties}=useAuth();
-    const [univerId,setUniverId]=useState(null)
+    const {faculties,setFaculties}=useAuth();
+    const {univerId,setUniverId}=useAuth()
+    const{blok1}=useAuth()
+    const{blok2s}=useAuth();
+    const{selectedfac,setSelectedfac}=useAuth()
+
+    useEffect(()=>{
+        fetch(`https://taest-b.herokuapp.com/faculties?blok1=${blok1}&blok2=${blok2s}`)
+        .then (res=>res.json())
+        .then (data=>setFaculties(data))
+        .catch (err=>console.log(err));
+
+    },[blok1,blok2s,setFaculties]);
 
     const filteredUniver=faculties?.filter(faculted=>faculted?.univer_id === Number(univerId))
+    const filteredFac=faculties?.filter(faculted=>faculted?.fac_id === selectedfac)
 
     return(
         <div className="direction">
@@ -35,14 +47,14 @@ export const Direction=()=>{
                         </select>
 
                         <ul className="direction__list">
-                            <li className="direction__item-title">Fakultetlar ro`yxati :</li>
+                            <li className="direction__item-title">Fakultetlar ro`yxati : birini tanlang</li>
                             {filteredUniver?.map(univer=>(
-                                <li key={univer.fac_id} className="direction__item">{univer.fac_name}</li>  
+                                <li key={univer.fac_id} className="direction__item" onClick={(e)=>setSelectedfac(e.target.value)} value={univer.fac_id}>{univer.fac_name}</li>  
                             ))}
                         </ul>
                     </div>
                     <div className="direction__right">
-                        {filteredUniver?.map(univer=>(
+                        {filteredFac?.map(univer=>(
                             <div key={univer.fac_id} className="direction__right-box">
                                 <h4 className="direction__right-title">{univer.fac_name}</h4>
                                 <ul className="direction__right-list">
@@ -57,6 +69,7 @@ export const Direction=()=>{
                                 </ul>
                             </div>
                         ))}
+                        <Link to='/tests' className='direction__link'>Testni boshlash</Link>
                     </div>
                 </div>
             </div>

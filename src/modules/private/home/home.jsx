@@ -10,7 +10,7 @@ export const Home=()=>{
                         TestBor saytiga xush kelibsiz !
                     </h1>
                     <p className="home__text">Tugmani bosing va bizning testlar bilan o`z bilimingizni oshiring</p>
-                    <Link to='blok' className="home__link">Testga kirish</Link>
+                    <Link to='/blok' className="home__link">Testga kirish</Link>
                 </div>
             </div>
         </div>

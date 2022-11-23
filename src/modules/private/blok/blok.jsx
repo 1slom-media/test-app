@@ -1,31 +1,21 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 import {FiArrowLeft} from 'react-icons/fi';
 import './blok.scss';
 import { useAuth } from '../../../hooks/useAuth';
 
 export const Blok=()=>{
-    const[sciences,setSciences]=useState(null)
-    const[blok1,setBlok1]=useState(null)
-    const[blok2s,setBlok2]=useState(null)
-    const{setFaculties}=useAuth()
+    const{sciences,setSciences}=useAuth()
+    const{blok1,setBlok1}=useAuth()
+    const{setBlok2}=useAuth()
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/sciences`)
+        fetch(`https://taest-b.herokuapp.com/sciences`)
         .then (res=>res.json())
         .then (data=>setSciences(data))
         .catch (err=>console.log(err));
 
-    },[]);
-
-    useEffect(()=>{
-        fetch(`http://localhost:5000/faculties?blok1=${blok1}&blok2=${blok2s}`)
-        .then (res=>res.json())
-        .then (data=>setFaculties(data))
-        .catch (err=>console.log(err));
-
-    },[blok1,blok2s,setFaculties]);
-
+    },[setSciences]);
 
     const blok2=sciences?.filter(science=>{
         if(Number(blok1)=== 1){
